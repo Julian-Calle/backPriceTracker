@@ -7,6 +7,7 @@ const PORT = process.env.PORT || 3000;
 const getDB = require("./db");
 const cors = require("cors");
 const path = require("path");
+const client = require("./front/build");
 
 // #################################################################
 // #             Importamos controllers y middlewares              #
@@ -40,7 +41,7 @@ app.use(cors());
 //Archivos estaticos (habilitar carpeta uploads)
 // app.use(express.static(path.join(__dirname, "uploads")));
 // app.use("/uploads", express.static("../front/build"));
-app.use(express.static("front/build"));
+// app.use(express.static("front/build"));
 // app.use(express.static("front/build"));
 // Body parser (multipart form data <- subida de imágenes)
 app.use(fileUpload());
@@ -49,14 +50,18 @@ if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static(path.join(__dirname, "front", "build")));
+// }
+
 // ###################################################
 // #                     Endpoints                   #
 // ###################################################
 
 //URL ejemplo: http://localhost:3000/new
-// app.get("/", (req, res) => {
-//   res.send("hola");
-// });
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "front", "build", "index.html"));
+});
 
 //POST - Añadir un item
 //URL ejemplo: http://localhost:3000/new
