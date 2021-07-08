@@ -8,7 +8,7 @@ const Joi = require("joi");
 require("dotenv").config();
 const { ensureDir, unlink } = require("fs-extra");
 const { UPLOADS_DIRECTORY } = process.env;
-const uploadsDir = path.join(__dirname, UPLOADS_DIRECTORY);
+// const uploadsDir = path.join(__dirname, UPLOADS_DIRECTORY);
 
 // Configuramos sendgrid
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
@@ -27,12 +27,12 @@ function formatDateToDB(dateObject) {
  * @param {string} photo - Nombre de la imagen
  * @param {string} folder - Directorio en el que se ecuentra la imagen
  */
-async function deletePhoto(photo, folder) {
-  folder = folder === undefined ? "" : folder;
-  const photoPath = path.join(uploadsDir, folder, photo);
+// async function deletePhoto(photo, folder) {
+//   folder = folder === undefined ? "" : folder;
+//   const photoPath = path.join(uploadsDir, folder, photo);
 
-  await unlink(photoPath);
-}
+//   await unlink(photoPath);
+// }
 
 /**
  * Guarda una foto en el directorio de uploads o un directorio que se indique dentro de uploads
@@ -245,7 +245,7 @@ function setPhotoUrl(fileName, folder = "") {
 module.exports = {
   formatDateToDB,
   savePhoto,
-  deletePhoto,
+  // deletePhoto,
   generateRandomString,
   sendMail,
   createError,
@@ -257,5 +257,5 @@ module.exports = {
   createGreetings,
   distanceDateInHours,
   setPhotoUrl,
-  uploadsDir,
+  // uploadsDir,
 };
