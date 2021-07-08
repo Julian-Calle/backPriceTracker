@@ -54,9 +54,9 @@ if (process.env.NODE_ENV === "development") {
 // ###################################################
 
 //URL ejemplo: http://localhost:3000/new
-app.get("/", (req, res) => {
-  res.send("hola");
-});
+// app.get("/", (req, res) => {
+//   res.send("hola");
+// });
 
 //POST - Añadir un item
 //URL ejemplo: http://localhost:3000/new
