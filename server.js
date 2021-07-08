@@ -40,6 +40,7 @@ app.use(cors());
 //Archivos estaticos (habilitar carpeta uploads)
 // app.use(express.static(path.join(__dirname, "uploads")));
 // app.use("/uploads", express.static("../front/build"));
+app.use("/front/build", express.static("front"));
 // app.use(express.static("front/build"));
 // Body parser (multipart form data <- subida de imágenes)
 app.use(fileUpload());
