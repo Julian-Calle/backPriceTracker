@@ -51,6 +51,12 @@ if (process.env.NODE_ENV === "development") {
 // ###################################################
 // #                     Endpoints                   #
 // ###################################################
+
+//URL ejemplo: http://localhost:3000/new
+app.post("/", (req, res) => {
+  res.send("helaaa");
+});
+
 //POST - Añadir un item
 //URL ejemplo: http://localhost:3000/new
 app.post("/new", addItem);
