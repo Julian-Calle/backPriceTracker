@@ -54,9 +54,9 @@ if (process.env.NODE_ENV === "development") {
 // ###################################################
 
 //URL ejemplo: http://localhost:3000/new
-// app.get("/", (req, res) => {
-//   res.sendFile(path.join(__dirname, "front", "build", "index.html"));
-// });
+app.get("/", (req, res) => {
+  res.send("Price tracker api");
+});
 
 //POST - Añadir un item
 //URL ejemplo: http://localhost:3000/new
@@ -88,10 +88,10 @@ app.use((error, req, res, next) => {
 });
 
 // if (process.env.NODE_ENV === "production") {
-app.use(express.static(path.join(__dirname, "front/build")));
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "front", "build", "index.html"));
-});
+// app.use(express.static(path.join(__dirname, "front/build")));
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "front", "build", "index.html"));
+// });
 
 // }
 
