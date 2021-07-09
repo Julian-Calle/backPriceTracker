@@ -1,4 +1,7 @@
-const apiUrl = "http://localhost:3000";
+// const { REACT_APP_APIKEY } = process.env;
+// const apiUrl = "http://localhost:3000";
+
+const apiUrl = "https://jptracker.herokuapp.com/";
 
 //Métodos empleados en nuestras peticiones
 export const requestMethods = {
