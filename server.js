@@ -87,14 +87,6 @@ app.use((error, req, res, next) => {
   });
 });
 
-// Middleware de 404
-app.use((req, res) => {
-  res.status(404).send({
-    status: "error",
-    message: "Not found",
-  });
-});
-
 // if (process.env.NODE_ENV === "production") {
 app.use(express.static(path.join(__dirname, "front", "build")));
 app.get("*", (req, res) => {
@@ -102,6 +94,14 @@ app.get("*", (req, res) => {
 });
 
 // }
+
+// Middleware de 404
+app.use((req, res) => {
+  res.status(404).send({
+    status: "error",
+    message: "Not found",
+  });
+});
 
 // Inicio del servidor
 app.listen(PORT, () => {
