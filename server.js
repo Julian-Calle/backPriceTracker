@@ -17,6 +17,7 @@ const deleteItem = require("./controllers/deleteItem");
 const getItems = require("./controllers/getItems");
 const updateStatus = require("./controllers/updateStatus");
 const ifItemExist = require("./middlewares/ifItemExist");
+const autoUpdate = require("./controllers/autoUpdate");
 
 // #################################################################
 // #                      Configuramos express                     #
@@ -48,15 +49,32 @@ app.use(fileUpload());
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
+// app.get("*", autoUpdate);
 
 // ###################################################
 // #                     Endpoints                   #
 // ###################################################
 
 //URL ejemplo: http://localhost:3000/new
-app.get("/", (req, res) => {
-  res.send("Price tracker api");
-});
+// app.get("/", (req, res) => {
+//   res.send("Price tracker api");
+// });
+// let connection;
+// setInterval(async () => {
+//   connection = await getDB();
+//   [listItems] = await connection.query(
+//     `
+// SELECT id from items;
+
+// `
+//   );
+//   const arrayITems = listItems.map((item) => {
+//     return item.id;
+//   });
+//   console.log(arrayITems);
+// }, 5000);
+
+setInterval(autoUpdate, 5000);
 
 //POST - Añadir un item
 //URL ejemplo: http://localhost:3000/new
