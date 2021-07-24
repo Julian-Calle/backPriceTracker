@@ -19,7 +19,7 @@ const autoUpdate = async () => {
     // const arrayITems = listItems.map((item) => {
     //   return item.id;
     // });
-    console.log(listItems);
+    // console.log(listItems);
     // }, 5000);
     const updateValues = listItems.map((item) => {
       console.log(item.url);
