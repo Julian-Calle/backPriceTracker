@@ -60,7 +60,7 @@ const updateStatus = async (req, res, next) => {
           data: `Item ${req.selectedItem.id} actualizado`,
         });
       });
-    }, 5000);
+    }, 20000);
   } catch (error) {
     next(error);
   } finally {
