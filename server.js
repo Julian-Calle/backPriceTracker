@@ -74,7 +74,7 @@ if (process.env.NODE_ENV === "development") {
 //   console.log(arrayITems);
 // }, 5000);
 
-setInterval(autoUpdate, 15000);
+setInterval(autoUpdate, 25000);
 
 //POST - Añadir un item
 //URL ejemplo: http://localhost:3000/new
