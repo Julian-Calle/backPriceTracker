@@ -21,8 +21,9 @@ const autoUpdate = async () => {
     // });
     console.log(listItems);
     // }, 5000);
-
-    for (const item of listItems) {
+    const updateValues = listItems.map((item) => {
+      console.log(item.url);
+      console.log(item.id);
       request(item.url, async (err, resp, body) => {
         if (!err && resp.statusCode === 200) {
           const $ = cheerio.load(body);
@@ -36,7 +37,7 @@ const autoUpdate = async () => {
         //se compara con el último, si es igual no se hace nada.
         const [searchLastItemPrice] = await connection.query(
           `
-        SELECT price FROM status where id = (SELECT MAX(id) FROM status WHERE itemID= ?)`,
+    SELECT price FROM status where id = (SELECT MAX(id) FROM status WHERE itemID= ?)`,
           [item.id]
         );
 
@@ -47,7 +48,7 @@ const autoUpdate = async () => {
         if (lastItemPrice !== itemPrice) {
           const [searchCurrentMinItemPrice] = await connection.query(
             `
-            SELECT MIN(price) "minPrice" FROM status WHERE itemID= ? Limit 1`,
+        SELECT MIN(price) "minPrice" FROM status WHERE itemID= ? Limit 1`,
             [item.id]
           );
           const currentMinItemPrice = searchCurrentMinItemPrice[0].minPrice;
@@ -61,19 +62,19 @@ const autoUpdate = async () => {
 
           await connection.query(
             `
-              INSERT INTO status (price, date, itemId) VALUES(?,CURDATE(),?)`,
+          INSERT INTO status (price, date, itemId) VALUES(?,CURDATE(),?)`,
             [itemPrice, item.id]
           );
         }
 
         //un correo a quien pidio el seguimiento del producto
 
-        res.send({
-          status: "ok",
-          data: `Item ${req.selectedItem.id} actualizado`,
-        });
+        // res.send({
+        //   status: "ok",
+        //   data: `Item ${item.id} actualizado`,
+        // });
       });
-    }
+    });
   } catch (error) {
     next(error);
   } finally {
