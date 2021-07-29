@@ -25,7 +25,7 @@ jobs:
     - name: test
       run: |
           curl --request GET \
-          --url 'https://yoursite.com/api/cron' 
+          --url 'https://juuglepricetracker-m9wcx3xcu-julian-calle.vercel.app' 
     
 
 
