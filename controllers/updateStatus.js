@@ -44,7 +44,8 @@ const updateStatus = async (req, res, next) => {
           if (itemPrice < currentMinItemPrice) {
             const to = req.selectedItem.email;
             const subject = `El precio ha bajado`;
-            const body = `El precio de ${req.selectedItem.name} ha bajado hasta ${itemPrice}€. Apresúrate a comprarlo en ${req.selectedItem.url}  `;
+            const body = `El precio de ${req.selectedItem.name} ha bajado hasta ${itemPrice}€. Apresúrate a comprarlo en el siguiente link `;
+            const url = req.selectedItem.url;
             console.log("numenor precio", itemPrice);
             sendMail({
               to,
@@ -52,6 +53,7 @@ const updateStatus = async (req, res, next) => {
               body,
               name: "Tracker",
               introMessage: "Hola",
+              url,
             });
           }
 

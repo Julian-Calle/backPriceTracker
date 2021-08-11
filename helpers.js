@@ -89,7 +89,7 @@ function generateRandomString(length) {
  * @param {string} name - Nombre del destinatario
  * @param {string} introMessage - Saludo inicial del correo (Buenos días, Hola, etc.)
  */
-async function sendMail({ to, subject, body, name, introMessage }) {
+async function sendMail({ to, subject, body, name, introMessage, url }) {
   // Instrucciones: https://www.npmjs.com/package/@sendgrid/mail
   console.log({ to, subject, body, name, introMessage });
   try {
@@ -103,6 +103,7 @@ async function sendMail({ to, subject, body, name, introMessage }) {
         <div>
           <h2>${subject}</h2>
           <p>${body}</p>
+          <a href=${url}>Tu producto thomann </a>
           <br>
           <strong><i><u>Juugle</u> "Let's <u>CODE</u>"</i></strong>
         </div>
