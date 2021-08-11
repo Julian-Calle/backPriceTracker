@@ -9,7 +9,7 @@ const ifItemExist = async (req, res, next) => {
     //verificar si existe. En caso de ser así se devuelve un error
     const [search] = await connection.query(
       `
-    SELECT id, name, url FROM items WHERE id= ?
+    SELECT id, name, url, email FROM items WHERE id= ?
     `,
       [id]
     );
@@ -18,6 +18,7 @@ const ifItemExist = async (req, res, next) => {
       throw createError("Este item NO está siendo trackeado", 400);
     }
     req.selectedItem = search[0];
+    console.log(req.selectedItem);
     next();
   } catch (error) {
     next(error);

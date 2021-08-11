@@ -17,7 +17,6 @@ const deleteItem = require("./controllers/deleteItem");
 const getItems = require("./controllers/getItems");
 const updateStatus = require("./controllers/updateStatus");
 const ifItemExist = require("./middlewares/ifItemExist");
-const autoUpdate = require("./controllers/autoUpdate");
 
 // #################################################################
 // #                      Configuramos express                     #
@@ -56,23 +55,9 @@ if (process.env.NODE_ENV === "development") {
 // ###################################################
 
 //URL ejemplo: http://localhost:3000/new
-// app.get("/", (req, res) => {
-//   res.send("Price tracker api");
-// });
-// let connection;
-// setInterval(async () => {
-//   connection = await getDB();
-//   [listItems] = await connection.query(
-//     `
-// SELECT id from items;
-
-// `
-//   );
-//   const arrayITems = listItems.map((item) => {
-//     return item.id;
-//   });
-//   console.log(arrayITems);
-// }, 5000);
+app.get("/", (req, res) => {
+  res.send("Price tracker api");
+});
 
 // setInterval(autoUpdate, 60000);
 

@@ -91,6 +91,7 @@ function generateRandomString(length) {
  */
 async function sendMail({ to, subject, body, name, introMessage }) {
   // Instrucciones: https://www.npmjs.com/package/@sendgrid/mail
+  console.log({ to, subject, body, name, introMessage });
   try {
     const msg = {
       to,
@@ -103,14 +104,23 @@ async function sendMail({ to, subject, body, name, introMessage }) {
           <h2>${subject}</h2>
           <p>${body}</p>
           <br>
-          <strong><i><u>Coworkit</u> "Let's synergy <u>together</u>"</i></strong>
+          <strong><i><u>Juugle</u> "Let's <u>CODE</u>"</i></strong>
         </div>
       `,
     };
 
     await sgMail.send(msg);
+    // .then(() => {
+    //   console.log("Message sent");
+    // })
+    // .catch((error) => {
+    //   console.log(error.response.body);
+    //   // console.log(error.response.body.errors[0].message)
+    // });
   } catch (error) {
-    throw new Error("Error enviando mail");
+    // throw new Error("Error enviando mail");
+    console.log("That did not go well.");
+    throw error;
   }
 }
 

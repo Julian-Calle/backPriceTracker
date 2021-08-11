@@ -1,5 +1,6 @@
 const cheerio = require("cheerio");
 const request = require("request");
+const { sendMail } = require("../helpers");
 
 const updateStatus = async (req, res, next) => {
   let connection;
@@ -41,7 +42,17 @@ const updateStatus = async (req, res, next) => {
           // console.log(currentMinItemPrice);
 
           if (itemPrice < currentMinItemPrice) {
-            // console.log("nuevo menor precio y enviar correo");
+            const to = req.selectedItem.email;
+            const subject = `El precio ha bajado`;
+            const body = `El precio de ${req.selectedItem.name} ha bajado hasta ${itemPrice}€. Apresúrate a comprarlo en ${req.selectedItem.url}  `;
+            console.log("numenor precio", itemPrice);
+            sendMail({
+              to,
+              subject,
+              body,
+              name: "Tracker",
+              introMessage: "Hola",
+            });
           }
 
           //añadir el nuevo status

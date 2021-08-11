@@ -35,7 +35,7 @@ const addItem = async (req, res, next) => {
         $("meta[itemprop ='price']", ".price-and-availability").each(
           function () {
             itemPrice = $(this).attr("content");
-            // console.log(itemPrice);
+            console.log(itemPrice);
           }
         );
 

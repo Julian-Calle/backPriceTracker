@@ -25,7 +25,7 @@ function App() {
     });
     getItemsInfo();
     console.log("ACTUALIZOOOOO");
-  }, 10000);
+  }, 30000);
   return (
     <div className="mainContainer">
       <section className="addITem">
