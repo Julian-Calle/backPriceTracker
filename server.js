@@ -9,6 +9,7 @@ const PORT = process.env.PORT || 3000;
 const getDB = require("./db");
 const cors = require("cors");
 const path = require("path");
+const pathApi = process.env.PUBLIC_HOST;
 
 // #################################################################
 // #                      Configuramos Swagger                     #
@@ -16,8 +17,28 @@ const path = require("path");
 const swaggerOptions = {
   swaggerDefinition: {
     info: {
+      description:
+        "API was mented to be used for tracking product from `Thomann` ([website](https://www.thomann.de/es/index.html)). In the following interactive End point you can test this API  [link](http://swagger.io)",
+      contact: {
+        email: "jcallecristancho@gmail.com",
+      },
       title: " Price tracker API",
       version: "1.0.0",
+    },
+    host: pathApi,
+    tags: [
+      {
+        name: "End Points",
+        description: " List of options to track item in Thomann website",
+        externalDocs: {
+          description: "Check the code",
+          url: "https://github.com/Julian-Calle/price_tracker",
+        },
+      },
+    ],
+    externalDocs: {
+      description: "You can check the repositori of this API HERE ",
+      url: "https://github.com/Julian-Calle/price_tracker",
     },
   },
   apis: ["server.js"],
@@ -75,7 +96,7 @@ app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 app.get("/", (req, res) => {
   res.send("Price tracker api");
 });
-console.log(swaggerDocs);
+
 // setInterval(autoUpdate, 60000);
 // *     summary: Add a new item into the tracked items.
 // *      consumes:
@@ -87,6 +108,8 @@ console.log(swaggerDocs);
  * @swagger
  * /new:
  *    post:
+ *      tags:
+ *      - "End Points"
  *      summary: "Add item"
  *      description: Add a new item into the tracked items
  *      parameters:
@@ -99,7 +122,7 @@ console.log(swaggerDocs);
  *             properties:
  *                url:
  *                   type: string
- *                   description: full url from thomman website
+ *                   description: full url from Thomann website
  *                email:
  *                   type: string
  *                   description: full email of the person interest on tracking the item
@@ -115,6 +138,8 @@ app.post("/new", addItem);
  * @swagger
  * /delete/{id}:
  *    delete:
+ *      tags:
+ *      - "End Points"
  *      summary: "Delete item"
  *      description: Delete item into the tracked items
  *      parameters:
@@ -141,6 +166,8 @@ app.delete("/delete/:id", ifItemExist, deleteItem);
  * @swagger
  * /items:
  *    get:
+ *      tags:
+ *      - "End Points"
  *      summary: "Get list of items"
  *      description: Get all the items that are being tracked
  *      responses:
@@ -155,6 +182,8 @@ app.get("/items", getItems);
  * @swagger
  * /update/{id}:
  *    post:
+ *      tags:
+ *      - "End Points"
  *      summary: "update price of item"
  *      description: Update the price of the item
  *      parameters:
@@ -186,14 +215,6 @@ app.use((error, req, res, next) => {
     message: error.message,
   });
 });
-
-// if (process.env.NODE_ENV === "production") {
-// app.use(express.static(path.join(__dirname, "front/build")));
-// app.get("*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "front", "build", "index.html"));
-// });
-
-// }
 
 // Middleware de 404
 app.use((req, res) => {
