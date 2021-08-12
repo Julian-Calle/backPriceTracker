@@ -17,8 +17,10 @@ const pathApi = process.env.PUBLIC_HOST;
 const swaggerOptions = {
   swaggerDefinition: {
     info: {
-      description:
-        "API was mented to be used for tracking product from `Thomann` ([website](https://www.thomann.de/es/index.html)). In the following interactive End point you can test this API  [link](http://swagger.io)",
+      description: `API was mented to be used for tracking product from [Thomann website](https://www.thomann.de/es/index.html). 
+      In the following interactive End point you can test this API.
+      There is a basic example of front application [HERE](https://juuglepricetracker.vercel.app/).
+      `,
       contact: {
         email: "jcallecristancho@gmail.com",
       },
