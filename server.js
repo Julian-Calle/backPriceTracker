@@ -1,5 +1,7 @@
 require("dotenv").config();
 const express = require("express");
+const swaggerJsDoc = require("swagger-jsdoc");
+const swaggerUI = require("swagger-ui-express");
 const morgan = require("morgan"); // Solo modo developer
 // const bodyParser = require("body-parser"); Obsoleto
 const fileUpload = require("express-fileupload");
@@ -7,6 +9,21 @@ const PORT = process.env.PORT || 3000;
 const getDB = require("./db");
 const cors = require("cors");
 const path = require("path");
+
+// #################################################################
+// #                      Configuramos Swagger                     #
+// #################################################################
+const swaggerOptions = {
+  swaggerDefinition: {
+    info: {
+      title: " Price tracker API",
+      version: "1.0.0",
+    },
+  },
+  apis: ["server.js"],
+};
+
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
 
 // #################################################################
 // #             Importamos controllers y middlewares              #
@@ -38,9 +55,8 @@ app.use(
 app.use(cors());
 
 //Archivos estaticos (habilitar carpeta uploads)
-// app.use(express.static(path.join(__dirname, "uploads")));
-// app.use("/uploads", express.static("../front/build"));
-// app.use(express.static("front/build"));
+
+app.use(express.static("html"));
 // app.use(express.static("./front/build"));
 // Body parser (multipart form data <- subida de imágenes)
 app.use(fileUpload());
@@ -48,7 +64,8 @@ app.use(fileUpload());
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
-// app.get("*", autoUpdate);
+
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 
 // ###################################################
 // #                     Endpoints                   #
@@ -58,21 +75,101 @@ if (process.env.NODE_ENV === "development") {
 app.get("/", (req, res) => {
   res.send("Price tracker api");
 });
-
+console.log(swaggerDocs);
 // setInterval(autoUpdate, 60000);
-
+// *     summary: Add a new item into the tracked items.
+// *      consumes:
+// *       - application/json
+// *           name: user
 //POST - Añadir un item
 //URL ejemplo: http://localhost:3000/new
+/**
+ * @swagger
+ * /new:
+ *    post:
+ *      summary: "Add item"
+ *      description: Add a new item into the tracked items
+ *      parameters:
+ *         - in: body
+ *           name: body
+ *           description: URL and email to set the item that will be tracked.
+ *           schema:
+ *             type: object
+ *             required: true
+ *             properties:
+ *                url:
+ *                   type: string
+ *                   description: full url from thomman website
+ *                email:
+ *                   type: string
+ *                   description: full email of the person interest on tracking the item
+ *      responses:
+ *          200:
+ *              description: Success
+ *          400:
+ *              description: Bad request
+ */
 app.post("/new", addItem);
 
+/**
+ * @swagger
+ * /delete/{id}:
+ *    delete:
+ *      summary: "Delete item"
+ *      description: Delete item into the tracked items
+ *      parameters:
+ *         - in: path
+ *           name: id
+ *           schema:
+ *             type: integer
+ *             required: true
+ *             description: ID of the item
+ *      responses:
+ *          200:
+ *              description: Success
+ *          400:
+ *              description: Bad request
+ */
 //DELETE - Eliminar un item
 //URL ejemplo: http://localhost:3000/:id
 app.delete("/delete/:id", ifItemExist, deleteItem);
 
 //GET - Solicitar listado de actualicaciones
 //URL ejemplo: http://localhost:3000/items
+
+/**
+ * @swagger
+ * /items:
+ *    get:
+ *      summary: "Get list of items"
+ *      description: Get all the items that are being tracked
+ *      responses:
+ *          200:
+ *              description: Success
+ *          400:
+ *              description: Bad request
+ */
 app.get("/items", getItems);
 
+/**
+ * @swagger
+ * /update/{id}:
+ *    post:
+ *      summary: "update price of item"
+ *      description: Update the price of the item
+ *      parameters:
+ *         - in: path
+ *           name: id
+ *           schema:
+ *             type: integer
+ *             required: true
+ *             description: ID of the item
+ *      responses:
+ *          200:
+ *              description: Success
+ *          400:
+ *              description: Bad request
+ */
 //GET - Solicitar listado de actualicaciones
 //URL ejemplo: http://localhost:3000/update:id
 app.post("/update/:id", ifItemExist, updateStatus);

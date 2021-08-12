@@ -12,7 +12,7 @@ const getItems = async (req, res, next) => {
 
       `
     );
-    console.log(listItems);
+    // console.log(listItems);
     const ListItemsWithPhoto = listItems.map((item) => {
       return {
         id: item.id,
@@ -24,7 +24,7 @@ const getItems = async (req, res, next) => {
     });
 
     //itero la lista para añadirle al resultado anterios las fechas y precios correspondientes
-    console.log(ListItemsWithPhoto.length);
+    // console.log(ListItemsWithPhoto.length);
     for (let i = 0; i < ListItemsWithPhoto.length; i++) {
       const [statusList] = await connection.query(
         `
@@ -34,7 +34,7 @@ const getItems = async (req, res, next) => {
         `,
         [ListItemsWithPhoto[i].id]
       );
-      console.log(statusList);
+      // console.log(statusList);
 
       const test = statusList.map((item) => {
         return { date: item.date, price: item.price };
