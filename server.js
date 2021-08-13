@@ -31,7 +31,7 @@ const swaggerOptions = {
     tags: [
       {
         name: "End Points",
-        description: " List of options to track item in Thomann website",
+        description: " List of options to track items in Thomann website",
         externalDocs: {
           description: "Check the code",
           url: "https://github.com/Julian-Calle/price_tracker",
