@@ -39,7 +39,7 @@ const swaggerOptions = {
       },
     ],
     externalDocs: {
-      description: "You can check the repositori of this API HERE ",
+      description: "You can check the repository of this API HERE ",
       url: "https://github.com/Julian-Calle/price_tracker",
     },
   },
@@ -124,10 +124,10 @@ app.get("/", (req, res) => {
  *             properties:
  *                url:
  *                   type: string
- *                   description: full url from Thomann website
+ *                   description: Full url from Thomann website
  *                email:
  *                   type: string
- *                   description: full email of the person interest on tracking the item
+ *                   description: Full email of the person interest on tracking the item
  *      responses:
  *          200:
  *              description: Success
@@ -186,7 +186,7 @@ app.get("/items", getItems);
  *    post:
  *      tags:
  *      - "End Points"
- *      summary: "update price of item"
+ *      summary: "Update price of item"
  *      description: Update the price of the item
  *      parameters:
  *         - in: path
