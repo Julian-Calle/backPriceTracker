@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../CSS/itemList.css";
 import ItemContainer from "./ItemContainer";
 // import { updateItem } from "../https/request.js";
-export default function ItemList({ itemsInfo, setItemsInfo }) {
+export default function ItemList({ itemsInfo, setItemsInfo, deleteItem }) {
   // const [itemsInfo, setItemsInfo] = useState([]);
   // const updater = setInterval(() => {
   //   console.log("ACTUALIZOOOOO");
@@ -14,7 +14,6 @@ export default function ItemList({ itemsInfo, setItemsInfo }) {
     <div className="charContainer">
       {itemsInfo?.length &&
         itemsInfo.map((item) => {
-          console.log(item);
           return (
             <ItemContainer
               key={item.id}
@@ -22,6 +21,9 @@ export default function ItemList({ itemsInfo, setItemsInfo }) {
               photo={item.photo}
               url={item.url}
               timeline={item.timeline}
+              deleteItem={() => {
+                deleteItem(item.id);
+              }}
             />
           );
         })}

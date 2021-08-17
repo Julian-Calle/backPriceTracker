@@ -3,7 +3,13 @@ import PriceChart from "./PriceChart";
 import Item from "./Item";
 import "../CSS/itemContainer.css";
 
-export default function ItemContainer({ name, photo, timeline, url }) {
+export default function ItemContainer({
+  name,
+  photo,
+  timeline,
+  url,
+  deleteItem,
+}) {
   const [activeChart, setActiveChart] = useState("hide");
   const [activephoto, setActivePhoto] = useState("show");
 
@@ -29,6 +35,7 @@ export default function ItemContainer({ name, photo, timeline, url }) {
         timeline={timeline}
         url={url}
         showChart={showChart}
+        deleteItem={deleteItem}
       />
       <PriceChart
         optionClass={activeChart}

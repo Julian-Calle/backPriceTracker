@@ -3,15 +3,14 @@ import "./App.css";
 import ItemList from "./components/ItemList";
 import AddItemForm from "./components/AddItemForm";
 import React, { useEffect, useState } from "react";
-import { getItems, updateItem } from "./https/request.js";
+import { getItems, updateItem, deleteItem } from "./https/request.js";
 
 function App() {
   const [itemsInfo, setItemsInfo] = useState([]);
 
   async function getItemsInfo() {
     const ItemList = await getItems();
-    // console.log(ItemList.data);
-    console.log(ItemList);
+
     setItemsInfo(ItemList);
   }
   useEffect(() => {
@@ -33,7 +32,11 @@ function App() {
       </section>
 
       <section className="itemListSection">
-        <ItemList itemsInfo={itemsInfo} setItemsInfo={setItemsInfo} />
+        <ItemList
+          itemsInfo={itemsInfo}
+          setItemsInfo={setItemsInfo}
+          deleteItem={deleteItem}
+        />
       </section>
     </div>
   );

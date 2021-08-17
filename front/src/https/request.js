@@ -17,7 +17,7 @@ export async function getItems() {
 }
 
 export async function deleteItem(id) {
-  const response = await fetchApi(`${endpoints.delete}/${id}`, {
+  const response = await fetchApi(`${endpoints.delete}${id}`, {
     method: requestMethods.delete,
   });
   if (response.status === "ok") {
