@@ -10,7 +10,7 @@ export default function AddItemForm({ update }) {
   const { register, errors, handleSubmit, reset } = useForm();
   const [alarmPsssword, setAlarmPsssword] = useState(false);
   const sendInfo = async (data) => {
-d    if (data.password === REACT_APP_PASSWORD) {
+    if (data.password === REACT_APP_PASSWORD) {
       setAlarmPsssword(false);
       await newItem(data.url, data.email);
       reset();
