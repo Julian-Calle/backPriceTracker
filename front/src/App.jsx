@@ -1,12 +1,14 @@
-import logo from "./logo.svg";
 import "./App.css";
 import ItemList from "./components/ItemList";
+import chartGIF from "./assets/chart.gif";
+
 import AddItemForm from "./components/AddItemForm";
 import React, { useEffect, useState } from "react";
 import { getItems, updateItem, deleteItem } from "./https/request.js";
 
 function App() {
   const [itemsInfo, setItemsInfo] = useState([]);
+  // const [activeDeleteFormItem, setActiveDeleteFormItem] = useState(false);
 
   async function getItemsInfo() {
     const ItemList = await getItems();
@@ -16,29 +18,34 @@ function App() {
   useEffect(() => {
     getItemsInfo();
   }, []);
-  const onceADay = 86400000;
-  const everyTenHours = 360000000;
-  const updater = setInterval(() => {
-    itemsInfo.map((item) => {
+
+  setInterval(() => {
+    itemsInfo.forEach((item) => {
       updateItem(item.id);
     });
     getItemsInfo();
     console.log("ACTUALIZOOOOO");
-  }, 30000);
+  }, 3600000);
   return (
-    <div className="mainContainer">
-      <section className="addITem">
-        <AddItemForm update={getItemsInfo} />
-      </section>
+    <>
+      <div className="mainContainer">
+        <div className="title">
+          <h1>Juugle Thomann price tracker</h1>
+        </div>
+        <section className="addItem">
+          <AddItemForm update={getItemsInfo} />
+        </section>
 
-      <section className="itemListSection">
-        <ItemList
-          itemsInfo={itemsInfo}
-          setItemsInfo={setItemsInfo}
-          deleteItem={deleteItem}
-        />
-      </section>
-    </div>
+        <section className="itemListSection">
+          <ItemList
+            itemsInfo={itemsInfo}
+            setItemsInfo={setItemsInfo}
+            deleteItem={deleteItem}
+            updateItemList={getItemsInfo}
+          />
+        </section>
+      </div>
+    </>
   );
 }
 

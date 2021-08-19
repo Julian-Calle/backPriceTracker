@@ -8,7 +8,8 @@ export default function ItemContainer({
   photo,
   timeline,
   url,
-  deleteItem,
+  selectItem,
+  switchDeleteFormItem,
 }) {
   const [activeChart, setActiveChart] = useState("hide");
   const [activephoto, setActivePhoto] = useState("show");
@@ -35,7 +36,8 @@ export default function ItemContainer({
         timeline={timeline}
         url={url}
         showChart={showChart}
-        deleteItem={deleteItem}
+        selectItem={selectItem}
+        switchDeleteFormItem={switchDeleteFormItem}
       />
       <PriceChart
         optionClass={activeChart}

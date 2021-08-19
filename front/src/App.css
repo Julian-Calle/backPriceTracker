@@ -39,8 +39,9 @@ box-sizing: border-box;
 
 
 
-/* .chart{
-  background: white;
-  border-radius: 20px; */
-  /* margin: 2rem; */
-/* } */
+.title{
+  background: rgb(255, 255, 255);
+  border-radius: 20px; 
+  padding: 1rem;
+ }
+

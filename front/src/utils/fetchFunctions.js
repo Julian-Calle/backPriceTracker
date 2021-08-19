@@ -1,6 +1,6 @@
 // const { REACT_APP_APIKEY } = process.env;
 // const apiUrl = "http://localhost:3000";
-const { REACT_APP_API, REACT_APP_APo } = process.env;
+const { REACT_APP_API } = process.env;
 const apiUrl = REACT_APP_API;
 
 //Métodos empleados en nuestras peticiones

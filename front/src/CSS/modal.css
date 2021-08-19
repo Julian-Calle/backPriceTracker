@@ -1,0 +1,70 @@
+.modalContainer{
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+/* overflow: auto; */
+
+}
+.modalTitle{
+font-size: 2rem;
+font-weight: 600;
+margin-bottom: 2rem;
+
+}
+.modalBody{
+flex-grow: 1;
+overflow: auto;
+/* border: rgb(177, 177, 177) 2px solid; */
+border-radius: 5px;
+
+}
+.rodal-dialog{
+  border-radius: 20px;
+  /* background-color:#293541 ; */
+}
+
+.ModalButtons{
+display: flex;
+gap: 1rem;
+position: absolute;
+bottom: 10px;
+padding: .2rem 1rem;
+}
+
+.firstBtn{
+ background-color: #03a9f4;
+ color: white;
+ padding: .2rem 1rem;
+ border-radius: 5px;
+border: white 2px solid;
+transition-duration:  .4s;
+
+}
+.firstBtn:hover{
+ 
+  background-color: #2813e9;
+  border: blue 2px solid;
+  box-shadow: #1900ff 0px 0px 9px;
+}
+
+.secondBtn{
+  background-color:white;
+  color: #03a9f4;
+  padding: .2rem 1rem;
+  border-radius: 5px;
+ border: #03a9f4 1px solid;
+ transition-duration:  .4s;
+ 
+ }
+ .secondBtn:hover{
+   box-shadow: #2813e9 0px 0px 9px;
+   color: #2813e9;
+ }
+ .bodyField{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+  align-items: center;
+  text-align: center;
+ }

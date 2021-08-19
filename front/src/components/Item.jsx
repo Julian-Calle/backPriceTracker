@@ -1,10 +1,5 @@
-import React from "react";
 import { Link, BrowserRouter as Router } from "react-router-dom";
 import BottonIcon from "../components/BottonIcon";
-
-// const eraseItem = () => {
-//   deleteItem
-// };
 
 export default function Item({
   photo,
@@ -13,14 +8,20 @@ export default function Item({
   timeline,
   showChart,
   activephoto,
-  deleteItem,
+  selectItem,
+  switchDeleteFormItem,
 }) {
   return (
     <div
       id={name.split(" ").join("").trim()}
       className={`${activephoto} itemInfo`}
     >
-      <BottonIcon icon="trash" cls="delete_btn" action={deleteItem} />
+      <BottonIcon
+        // onClick={switchDeleteFormItem}
+        icon="trash"
+        cls="delete_btn"
+        action={selectItem}
+      />
       <img src={photo} alt={name} onClick={showChart} />
       <Router>
         <h2>

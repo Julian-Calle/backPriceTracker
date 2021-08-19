@@ -1,0 +1,31 @@
+.delteItemForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+}
+.delteItemForm > div{
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+    gap: .5rem
+}
+
+
+.okButton{
+margin-top: 2.5rem;
+background-color: #03a9f4;
+color: white;
+padding: .2rem 1rem;
+border-radius: 5px;
+border: white 2px solid;
+transition-duration:  .4s;
+
+}
+.okButton:hover{
+
+background-color: #2813e9;
+border: blue 2px solid;
+box-shadow: #1900ff 0px 0px 9px;
+}
