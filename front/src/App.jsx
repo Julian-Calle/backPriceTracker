@@ -9,7 +9,7 @@ import { getItems, updateItem, deleteItem } from "./https/request.js";
 function App() {
   const [itemsInfo, setItemsInfo] = useState([]);
   // const [activeDeleteFormItem, setActiveDeleteFormItem] = useState(false);
-
+  const minutes = 60000 * 5;
   async function getItemsInfo() {
     const ItemList = await getItems();
 
@@ -25,7 +25,7 @@ function App() {
     });
     getItemsInfo();
     console.log("ACTUALIZOOOOO");
-  }, 180000);
+  }, minutes);
   return (
     <>
       <div className="mainContainer">
