@@ -35,18 +35,14 @@ const addItem = async (req, res, next) => {
         $("meta[itemprop ='price']", ".price-and-availability").each(
           function () {
             itemPrice = $(this).attr("content");
-            console.log(itemPrice);
           }
         );
 
-        $("h1[itemprop ='name']", ".rs-prod-headline").each(function () {
+        $("h1[itemprop ='name'].product-title__title").each(function () {
           itemName = $(this).html();
-          // console.log(itemName);
         });
 
-        $("img", ".prod-media-spot-container").each(async function () {
-          itemPhotoUrl = await $(this).attr("src");
-        });
+        itemPhotoUrl = await $("div img.spotlight__item-image").attr("src");
       }
       //añadir el item a la lista de items
 

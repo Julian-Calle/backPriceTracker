@@ -21,6 +21,9 @@ async function getDB() {
       database: MYSQL_DATABASE,
       timezone: "Z",
       multipleStatements: status,
+      ssl: {
+        rejectUnauthorized: false,
+      },
     });
   }
   return await pool.getConnection();
