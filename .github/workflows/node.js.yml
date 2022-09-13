@@ -24,7 +24,7 @@ jobs:
           cache: "npm"
       - run: |
           npm i
-          npx pm2 stopr 0
+          npx pm2 stop 0
           npx pm2 start 0
           npx pm2 save
           sudo service nginx restart
