@@ -39,6 +39,7 @@
     "morgan": "^1.10.0",
     "mysql2": "^2.2.5",
     "nightmare": "^3.0.2",
+    "pm2": "^5.2.0",
     "request": "^2.88.2",
     "sharp": "^0.26.3",
     "swagger-jsdoc": "^6.1.0",
