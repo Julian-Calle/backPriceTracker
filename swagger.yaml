@@ -1,0 +1,293 @@
+openapi: "3.0.0"
+info:
+  title: Price tracker API
+  description: |-
+    API was mented to be used for tracking products from [Thomann website](https://www.thomann.de/es/index.html).
+    In the following interactive End points you can test this API.
+    There is a basic example of front application [HERE](https://juuglepricetracker.vercel.app/)
+  contact:
+    email: jcallecristancho@gmail.com
+  version: 1.0.0
+externalDocs:
+  description: You can check the repository of this API HERE
+  url: https://github.com/Julian-Calle/price_tracker
+servers:
+  - url: http://localhost:3000
+tags:
+  - name: End Points
+    description: List of all the end points
+    externalDocs:
+      description: Find out more
+      url: https://github.com/Julian-Calle/price_tracker
+paths:
+  /new:
+    post:
+      tags:
+        - End Points
+      summary: Add item
+      description: Add a new item into the tracked items
+      operationId: addItem
+      requestBody:
+        description: Update an existent pet in the store
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Item"
+        required: true
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ItemCreated"
+        "400":
+          description: Item duplicated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ItemDuplicated"
+  /delete/{id}:
+    delete:
+      tags:
+        - End Points
+      summary: Delete item
+      description: Delete item into the tracked
+      operationId: deleteItem
+      parameters:
+        - name: id
+          in: path
+          description: ID of the item
+          required: true
+          schema:
+            $ref: "#/components/schemas/Id"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ItemDeleted"
+        "400":
+          description: Item not tracked
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ItemNotTracked"
+  /items:
+    get:
+      tags:
+        - End Points
+      summary: Get list of item
+      description: Get all the items that are being tracked
+      operationId: getItems
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ItemList"
+  /update/{id}:
+    delete:
+      tags:
+        - End Points
+      summary: Update price of item
+      description: Update the price of the item
+      operationId: updateItem
+      parameters:
+        - name: id
+          in: path
+          description: ID of the item
+          required: true
+          schema:
+            $ref: "#/components/schemas/Id"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ItemUpdated"
+        "400":
+          description: Item not tracked
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ItemNotTracked"
+components:
+  schemas:
+    Email:
+      type: string
+      example: example@example.com
+    Url:
+      type: string
+      example: "https://www.thomann.de/es/eurolite_rubberlight_led_rl1_white_9m.htm"
+    Id:
+      type: integer
+      format: int64
+      example: 1
+    Price:
+      type: integer
+      format: int32
+      example: 76
+    Name:
+      type: string
+      example: product name
+    Item:
+      type: object
+      required:
+        - email
+        - url
+      properties:
+        email:
+          $ref: "#/components/schemas/Email"
+        url:
+          $ref: "#/components/schemas/Url"
+    TimeSpot:
+      type: object
+      required:
+        - date
+        - price
+      properties:
+        date:
+          type: string
+          example: "2021-08-08T00:00:00.000Z"
+        price:
+          $ref: "#/components/schemas/Price"
+      example:
+        date: "2021-08-08T00:00:00.000Z"
+        price: 67
+    TimeLine:
+      type: array
+      items:
+        $ref: "#/components/schemas/TimeSpot"
+    ItemList:
+      type: object
+      required:
+        - status
+        - data
+      properties:
+        status:
+          type: string
+          example: ok
+        data:
+          type: object
+          required:
+            - id
+            - name
+            - photo
+            - url
+            - timeline
+          properties:
+            id:
+              $ref: "#/components/schemas/Id"
+            name:
+              $ref: "#/components/schemas/Name"
+            photo:
+              type: string
+              example: "https://source.unsplash.com/random/300×300"
+            url:
+              $ref: "#/components/schemas/Url"
+            timeline:
+              $ref: "#/components/schemas/TimeLine"
+    ItemCreated:
+      type: object
+      required:
+        - status
+        - data
+      properties:
+        status:
+          type: string
+          example: ok
+        data:
+          type: object
+          required:
+            - name
+            - price
+            - email
+            - url
+          properties:
+            email:
+              $ref: "#/components/schemas/Email"
+            url:
+              $ref: "#/components/schemas/Url"
+            price:
+              $ref: "#/components/schemas/Price"
+            name:
+              $ref: "#/components/schemas/Name"
+    ItemDeleted:
+      type: object
+      required:
+        - status
+        - data
+      properties:
+        status:
+          type: string
+          example: ok
+        data:
+          type: object
+          required:
+            - name
+            - id
+            - email
+            - url
+          properties:
+            email:
+              $ref: "#/components/schemas/Email"
+            url:
+              $ref: "#/components/schemas/Url"
+            id:
+              $ref: "#/components/schemas/Id"
+            name:
+              type: string
+              example: product name
+    ItemDuplicated:
+      type: object
+      required:
+        - status
+        - message
+      properties:
+        status:
+          type: string
+          example: error
+        message:
+          type: string
+          example: Este item ya está siendo trackeado
+    ItemUpdated:
+      type: object
+      required:
+        - status
+        - data
+      properties:
+        status:
+          type: string
+          example: error
+        data:
+          type: string
+          example: Item 25 actualizado
+    ItemNotTracked:
+      type: object
+      properties:
+        status:
+          type: string
+          example: error
+        message:
+          type: string
+          example: Este item NO está siendo trackeado
+      required:
+        - status
+        - message
+  securitySchemes:
+    petstore_auth:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://petstore3.swagger.io/oauth/authorize
+          scopes:
+            write:pets: modify pets in your account
+            read:pets: read your pets
+    api_key:
+      type: apiKey
+      name: api_key
+      in: header
