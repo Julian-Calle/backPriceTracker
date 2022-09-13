@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x, 16.x]
+        node-version: [14.x, 16.x, 18.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -22,8 +22,9 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
-      - run: npm i
-      - run: pm2 stop jptracker
-      - run: pm2 start jptracker
-      - run: pm2 save
-      - run: sudo service nginx restart
+      - run: |
+          npm i
+          pm2 stop jptracker
+          pm2 start jptracker
+          pm2 save
+          sudo service nginx restart
