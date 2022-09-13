@@ -24,6 +24,6 @@ jobs:
           cache: "npm"
       - run: |
           npm i
-          pm2 start index.js
-          pm2 save
+          npx pm2 start index.js
+          npx pm2 save
           sudo service nginx restart
