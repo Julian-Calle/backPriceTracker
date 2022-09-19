@@ -27,4 +27,7 @@ jobs:
           npx pm2 stop pricetracker
           npx pm2 start pricetracker
           npx pm2 save
+          cd front
+          npm i
+          npm run build
           sudo service nginx restart
