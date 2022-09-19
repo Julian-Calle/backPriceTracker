@@ -1,6 +1,5 @@
 import "./App.css";
 import ItemList from "./components/ItemList";
-import chartGIF from "./assets/chart.gif";
 
 import AddItemForm from "./components/AddItemForm";
 import React, { useEffect, useState } from "react";
