@@ -1,38 +1,19 @@
-const getItems = async (req, res, next) => {
-  const { PUBLIC_HOST, UPLOADS_DIRECTORY } = process.env;
-  let connection;
-  try {
-    connection = await req.app.locals.getDB();
-    const { user_id } = req.params;
-    const { type } = req.query;
-    // obtengo la lista de items
-    const [listItems] = await connection.query(
-      `
-      SELECT id, name, photo, url FROM items
+const { getItemsService } = require("./../services");
 
-      `
-    );
-    // console.log(listItems);
-    const ListItemsWithPhoto = listItems.map((item) => {
-      return {
-        id: item.id,
-        name: item.name,
-        // photo: `${PUBLIC_HOST}/${UPLOADS_DIRECTORY}/${item.photo}`,
-        photo: item.photo,
-        url: item.url,
-      };
-    });
+const getItems = async (req, res, next) => {
+  // const { PUBLIC_HOST, UPLOADS_DIRECTORY } = process.env;
+  const connection = await req.app.locals.getDB();
+  try {
+    const listItemsWithPhoto = await getItemsService();
 
     //itero la lista para añadirle al resultado anterios las fechas y precios correspondientes
-    // console.log(ListItemsWithPhoto.length);
-    for (let i = 0; i < ListItemsWithPhoto.length; i++) {
+    // console.log(listItemsWithPhoto.length);
+    for (let i = 0; i < listItemsWithPhoto.length; i++) {
       const [statusList] = await connection.query(
         `
         SELECT date, price FROM status  WHERE itemId =? order by 1 ASC 
-        
-  
         `,
-        [ListItemsWithPhoto[i].id]
+        [listItemsWithPhoto[i].id]
       );
       // console.log(statusList);
 
@@ -40,12 +21,12 @@ const getItems = async (req, res, next) => {
         return { date: item.date, price: item.price };
       });
 
-      ListItemsWithPhoto[i].timeline = test;
+      listItemsWithPhoto[i].timeline = test;
     }
 
     res.send({
       status: "ok",
-      data: ListItemsWithPhoto,
+      data: listItemsWithPhoto,
     });
   } catch (error) {
     next(error);

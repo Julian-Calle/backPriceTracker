@@ -59,11 +59,10 @@ const addItem = async (req, res, next) => {
 
       // Guardar el nombre de la ruta de la imagen y conseguir el nombre del fichero
 
-      await connection.query(
-        `
-             UPDATE items SET photo=? WHERE id=?`,
-        [itemPhotoUrl, newItemId]
-      );
+      await connection.query(`UPDATE items SET photo=? WHERE id=?`, [
+        itemPhotoUrl,
+        newItemId,
+      ]);
 
       //añadir la primera actualización
 

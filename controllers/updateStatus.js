@@ -8,8 +8,8 @@ const updateStatus = async (req, res, next) => {
 
   try {
     connection = await req.app.locals.getDB();
-    const { id } = req.params;
-
+    // const { id } = req.params;
+    console.log({ selectedItem: req.selectedItem });
     setTimeout(() => {
       request(req.selectedItem.url, async (err, resp, body) => {
         if (!err && resp.statusCode === 200) {
@@ -39,14 +39,15 @@ const updateStatus = async (req, res, next) => {
             [req.selectedItem.id]
           );
           const currentMinItemPrice = searchCurrentMinItemPrice[0].minPrice;
-          // console.log(currentMinItemPrice);
+          console.log({ itemPrice });
+          console.log({ currentMinItemPrice });
 
           if (itemPrice < currentMinItemPrice) {
             const to = req.selectedItem.email;
             const subject = `El precio ha bajado`;
             const body = `El precio de "${req.selectedItem.name}" ha bajado hasta ${itemPrice} €. Apresúrate a comprarlo en el siguiente link: `;
             const url = req.selectedItem.url;
-            console.log("numenor precio", itemPrice);
+            console.log("nuevo precio", itemPrice);
             sendMail({
               to,
               subject,

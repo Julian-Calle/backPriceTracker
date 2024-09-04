@@ -6,6 +6,9 @@ const PORT = process.env.PORT || 3000;
 const getDB = require("./db");
 const cors = require("cors");
 const swaggerDocumentation = require("./swagger.js");
+// const cron = require("node-cron");
+// const { getItemsService, updateItemService } = require("./services");
+// const { updateItemsTask } = require("./cronjob");
 
 // #################################################################
 // #             Importamos controllers y middlewares              #
@@ -103,3 +106,16 @@ app.use((req, res) => {
 app.listen(PORT, () => {
   console.log(`Servidor funcionando en http://localhost:${PORT} 🚀`);
 });
+// const itemTest2 = {
+//   id: 25,
+//   name: "Audix D4",
+//   photo:
+//     "https://thumbs.static-thomann.de/thumb/orig/pics/bdb/160141/7432948_800.jpg",
+//   url: "https://www.thomann.de/es/audix_d4_spezialmikro.htm",
+// };
+
+// updateItemsTask.start();
+// setTimeout(() => {
+//   updateItemsTask.start();
+//   updateItemsTask.stop();
+// }, 1000);
