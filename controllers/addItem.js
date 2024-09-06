@@ -65,15 +65,16 @@ const addItem = async (req, res, next) => {
       ]);
 
       //añadir la primera actualización
-
-      await connection.query(
-        `
-      INSERT INTO status (price,date,itemId) VALUES(?,CURDATE(),?)`,
-        [Number(itemPrice), newItemId]
-      );
+      if (!!itemPrice) {
+        await connection.query(
+          `
+    INSERT INTO status (price,date,itemId) VALUES(?,CURDATE(),?)`,
+          [Number(itemPrice), newItemId]
+        );
+      }
       res.send({
         status: "ok",
-        data: { name: itemName, price: itemPrice, email, url },
+        data: { name: itemName, price: itemPrice || 0, email, url },
       });
     });
 
